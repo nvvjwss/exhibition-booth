@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Siam.AI Booth">
+<title>Exhibition Booth — Siam.AI @ KMITL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<img class="bg-cloud bg-cloud-tr" src="/static/cloud-swirl.png" alt="">
+<img class="bg-cloud bg-cloud-bl" src="/static/cloud-swirl.png" alt="">
+
+<main>
+  <header>
+    <div class="powered-by-block">
+      <span class="powered-by-label">POWERED BY</span>
+      <img class="powered-by-logo" src="/static/siam-ai-logo.png" alt="Siam.AI Cloud">
+    </div>
+    <div class="brand">
+      <img class="avatar-face" src="/static/robot-face.png" alt="A1">
+      <h1>อยากทราบอะไรถามได้เลยครับ</h1>
+    </div>
+  </header>
+
+  <div id="sections">
+    {% for column in columns %}
+    <div class="col">
+      {% for section in column %}
+      <section class="{{ 'section-solo' if section.topics|length == 1 else '' }}">
+        <div class="section-title">{{ section.title|upper }}</div>
+        <div class="topics-row">
+          {% for t in section.topics %}
+          <button class="topic-btn {% if section.featured %}featured{% endif %} {% if section.accent %}accent{% endif %} {% if t.cover_image %}cover-btn{% endif %}" data-topic-id="{{ t.id }}" {% if t.cover_image %}style="background-image: url('/static/{{ t.cover_image }}');"{% endif %}>
+            {% if section.featured %}<span class="eyebrow">MEET THE HOST</span>{% endif %}
+            {% if t.image %}
+            <img class="topic-image" src="/static/{{ t.image }}" alt="">
+            {% elif not t.cover_image %}
+            <span class="topic-emoji">{{ t.emoji }}</span>
+            {% endif %}
+            <span class="topic-label">{{ t.label }}</span>
+          </button>
+          {% endfor %}
+        </div>
+      </section>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+</main>
+
+<div id="statusbar">
+  <div class="eq" id="eq">
+    <span></span><span></span><span></span><span></span>
+  </div>
+  <div class="statusbar-text">
+    <div class="phase-label" id="phaseLabel">READY</div>
+    <div class="topic-label-bar" id="topicLabelBar"></div>
+  </div>
+  <div class="hint-text" id="hintText"></div>
+  <button id="stopBtn">หยุด</button>
+</div>
+
+<script src="/static/script.js"></script>
+
+</body>
+</html>

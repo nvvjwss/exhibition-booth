@@ -1,0 +1,299 @@
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background: linear-gradient(160deg, #f3fbfd 0%, #eaf6fb 45%, #dff2f8 100%);
+  font-family: 'IBM Plex Sans Thai', 'IBM Plex Sans', -apple-system, "Segoe UI", Roboto, "Noto Sans Thai", sans-serif;
+  color: #0d2f42;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+button { font-family: inherit; }
+
+@keyframes eq { 0%,100% { transform: scaleY(0.25); } 50% { transform: scaleY(1); } }
+@keyframes pulseRing { 0% { box-shadow: 0 0 0 0 rgba(30,136,199,0.35); } 100% { box-shadow: 0 0 0 18px rgba(30,136,199,0); } }
+@keyframes blink { 0%, 92%, 100% { opacity: 1; } 95% { opacity: 0.15; } }
+
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 30px 40px 140px;
+}
+
+.bg-cloud {
+  position: fixed;
+  z-index: 0;
+  width: 1000px;
+  height: auto;
+  opacity: 0.55;
+  pointer-events: none;
+}
+.bg-cloud-tr { top: -50px; right: -120px; }
+.bg-cloud-bl { bottom: 250px; left: -160px; }
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 44px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.powered-by-block { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.powered-by-label { font-family: 'IBM Plex Sans', 'IBM Plex Sans Thai', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.28em; color: #4a7d94; }
+.powered-by-logo { height: 25px; width: auto; }
+.brand { display: flex; align-items: center; justify-content: center; gap: 4px; flex-wrap: wrap; }
+.avatar-face { width: 110px; height: auto; flex-shrink: 0; margin-right: 10px; }
+header h1 {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: #0d2f42;
+}
+
+.hint-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 22px 0 26px;
+  font-size: 1rem;
+  color: #4a7d94;
+}
+.hint-arrow {
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 1px solid rgba(30,136,199,0.35);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; color: #1e88c7; flex-shrink: 0;
+}
+
+#sections {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  align-items: stretch;
+}
+.col { display: flex; flex-direction: column; gap: 22px; min-width: 0; }
+
+/* ถ้า section เดี่ยว (การ์ด featured) เป็น section สุดท้ายในคอลัมน์ ให้ยืดเติมความสูงที่เหลือ
+   เพื่อให้ก้นคอลัมน์ชนกันพอดี แทนที่จะสูงตายตัวจนล้นเกินคอลัมน์อื่น */
+.col > section:last-child.section-solo { flex: 1; display: flex; flex-direction: column; }
+.col > section:last-child.section-solo .topics-row { flex: 1; display: flex; }
+.col > section:last-child.section-solo .topic-btn { flex: 1; }
+.col > section:last-child.section-solo .topic-btn.featured { min-height: 0; }
+.section-title {
+  font-family: 'IBM Plex Sans Thai', 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: 15px; letter-spacing: 0.1em; color: #5a93ab;
+  margin-bottom: 10px;
+}
+
+.topics-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.section-solo .topics-row { grid-template-columns: 1fr; }
+/* ถ้าจำนวนปุ่มในกลุ่มเป็นเลขคี่ ปุ่มสุดท้ายจะกว้างเต็มแถวแทนที่จะเหลือช่องว่างข้างๆ */
+.topics-row > .topic-btn:last-child:nth-child(odd) { grid-column: span 2; }
+
+.topic-btn {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  text-align: left;
+  min-height: 270px;
+  padding: 20px;
+  border: none;
+  border-radius: 22px;
+  background: linear-gradient(155deg, #e3f7fc 0%, #a9def0 100%);
+  color: #0d2f42;
+  cursor: pointer;
+  box-shadow: 0 10px 26px rgba(10,90,140,0.10);
+  transition: transform 120ms ease, box-shadow 160ms ease;
+  gap: 14px;
+}
+.topic-btn:active { transform: scale(0.975); }
+
+.topic-btn.featured {
+  min-height: 270px;
+  padding: 20px;
+}
+.topic-btn.wide { grid-column: span 2; min-height: 270px; }
+
+.topic-btn.accent {
+  border: none;
+  background: linear-gradient(155deg, #4fd2ee 0%, #1e88c7 100%);
+  color: #ffffff;
+  box-shadow: 0 14px 30px rgba(10,111,176,0.28);
+}
+.topic-btn.accent .play-dot { background: rgba(255,255,255,0.25); border: none; color: #ffffff; }
+.topic-btn.accent .topic-label { color: #ffffff; }
+
+.topic-btn.cover-btn {
+  background-size: cover;
+  background-position: center;
+  border: none;
+  color: #ffffff;
+}
+.topic-btn.cover-btn::before {
+  content: none;
+}
+.topic-btn[data-topic-id="data_center_partners"].cover-btn::before,
+.topic-btn[data-topic-id="ai_innovations"].cover-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(4,20,32,0.02) 0%, rgba(4,20,32,0.45) 100%);
+  z-index: 0;
+}
+.topic-btn.cover-btn .play-dot,
+.topic-btn.cover-btn .topic-label {
+  position: relative;
+  z-index: 1;
+}
+.topic-btn.cover-btn .play-dot { background: rgba(255,255,255,0.25); border: none; color: #ffffff; }
+.topic-btn.cover-btn .topic-label { color: #ffffff; }
+
+.eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px; letter-spacing: 0.16em; color: rgba(13,47,66,0.65);
+}
+.accent .eyebrow, .cover-btn .eyebrow { color: rgba(255,255,255,0.85); }
+.play-dot {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: rgba(30,136,199,0.14);
+  border: none;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: #0a6fb0;
+  flex-shrink: 0;
+}
+.featured .play-dot { width: 34px; height: 34px; font-size: 13px; }
+.topic-emoji { align-self: center; font-size: 3.2rem; line-height: 1; filter: saturate(0.9); }
+.featured .topic-emoji { font-size: 4.4rem; }
+.topic-image { align-self: center; flex: 1; min-height: 0; max-width: 90%; max-height: 190px; object-fit: contain; border-radius: 10px; }
+.featured .topic-image { max-height: 130px; }
+.topic-label {
+  margin-top: auto;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+  color: #0d2f42;
+}
+.featured .topic-label { font-size: 1.65rem; }
+
+/* highlight ระหว่างเล่น */
+.topic-btn.active {
+  outline: 2px solid rgba(30,136,199,0.85);
+  outline-offset: 2px;
+  animation: pulseRing 1400ms ease-out 2;
+}
+
+#statusbar {
+  position: fixed;
+  left: 40px; right: 40px; bottom: 26px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 16px 24px;
+  border-radius: 22px;
+  border: 1px solid rgba(30,136,199,0.18);
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 20px 44px rgba(10,90,140,0.22);
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 220ms ease, transform 260ms cubic-bezier(0.2,0.9,0.2,1);
+  pointer-events: none;
+  max-width: 1520px;
+  margin: 0 auto;
+}
+#statusbar.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+.eq { display: flex; align-items: flex-end; gap: 4px; width: 40px; height: 34px; flex-shrink: 0; }
+.eq span {
+  flex: 1; height: 100%; border-radius: 3px; background: #1e88c7;
+  transform-origin: bottom; opacity: 0.25;
+}
+.eq.on span { animation: eq 900ms ease-in-out infinite; opacity: 1; }
+.eq span:nth-child(2) { animation-delay: 150ms; }
+.eq span:nth-child(3) { animation-delay: 300ms; }
+.eq span:nth-child(4) { animation-delay: 450ms; }
+
+.statusbar-text { flex: 1; display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.phase-label { font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.2em; color: #1e88c7; text-transform: uppercase; }
+.topic-label-bar { font-size: 1.35rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #0d2f42; text-transform: uppercase; }
+.hint-text { font-size: 0.95rem; color: #4a7d94; white-space: nowrap; }
+#stopBtn {
+  flex: none;
+  padding: 13px 26px;
+  border-radius: 999px;
+  border: none;
+  background: #0a6fb0;
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+#stopBtn:active { transform: scale(0.97); }
+
+/* iPad แนวนอน (~1024-1180px CSS px) — บีบ 3 คอลัมน์แล้วแคบเกินไป ใช้ 2 คอลัมน์แทน
+   คอลัมน์ที่ 3 (Robotics + Others) ยืดเต็มแถวล่างแทนที่จะเหลือช่องว่างข้างๆ */
+@media (max-width: 1023px) {
+  #sections { grid-template-columns: repeat(2, 1fr); }
+  .col:nth-child(3) { grid-column: span 2; flex-direction: row; align-items: stretch; }
+  .col:nth-child(3) > section { flex: 1; }
+}
+
+/* iPad แนวตั้ง / จอแคบกว่า ~860px — สแต็กเป็นคอลัมน์เดียว */
+@media (max-width: 860px) {
+  #sections { grid-template-columns: 1fr; }
+  header { flex-direction: column; align-items: flex-start; }
+  .powered-by { align-items: flex-start; }
+  #statusbar { flex-wrap: wrap; left: 16px; right: 16px; }
+}
+
+/* จอเตี้ย (iPad แนวนอน 1024x768 เป็นต้น) — ย่อทุกอย่างให้พอดีในหน้าจอเดียว ไม่ต้อง scroll */
+@media (max-height: 800px) {
+  main { padding: 16px 32px 16px; }
+  .bg-cloud { width: 560px; opacity: 0.4; }
+
+  header { gap: 14px; margin-bottom: 20px; }
+  .powered-by-block { gap: 4px; }
+  .powered-by-label { font-size: 12px; }
+  .powered-by-logo { height: 21px; }
+  .brand { gap: 10px; }
+  .avatar-face { width: 60px; margin-right: 0; }
+  header h1 { font-size: 1.85rem; }
+
+  #sections { gap: 16px; }
+  .col { gap: 16px; }
+  .section-title { font-size: 12px; margin-bottom: 8px; }
+  .topics-row { gap: 12px; }
+
+  .topic-btn { min-height: 100px; padding: 14px; gap: 8px; border-radius: 16px; }
+  .topic-btn.featured { min-height: 270px; padding: 20px; }
+  .topic-btn.wide { min-height: 100px; }
+
+  .eyebrow { font-size: 11px; }
+  .play-dot { width: 28px; height: 28px; font-size: 10px; }
+  .featured .play-dot { width: 34px; height: 34px; font-size: 13px; }
+  .topic-emoji { font-size: 2.4rem; }
+  .featured .topic-emoji { font-size: 3.8rem; }
+  .topic-image { max-height: 70px; }
+  .featured .topic-image { max-height: 165px; }
+  .topic-label { font-size: 1.05rem; }
+  .featured .topic-label { font-size: 1.6rem; }
+
+  #statusbar { bottom: 18px; left: 28px; right: 28px; padding: 12px 20px; }
+}

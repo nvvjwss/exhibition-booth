@@ -1,0 +1,3 @@
+file 'slide_1.mp3'
+file 'slide_2.mp3'
+file 'slide_3.mp3'

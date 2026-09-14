@@ -1,0 +1,6 @@
+file 'slide_1.mp3'
+file 'slide_2.mp3'
+file 'slide_3.mp3'
+file 'slide_4.mp3'
+file 'slide_5.mp3'
+file 'slide_6.mp3'
