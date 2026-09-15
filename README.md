@@ -7,16 +7,16 @@ Visitors tap a topic button on an iPad. Each tap does two things at once:
 1. The Alpha Mini humanoid robot standing next to the booth **speaks an explanation** of that topic out loud (with matching gestures).
 2. The projector/TV screen next to it **jumps to the matching PowerPoint slide** automatically.
 
-The iPad is just a remote — the robot and the slides react almost instantly to whatever topic is picked, with no visitor training needed.
+The iPad is just a remote: the robot and the slides react almost instantly to whatever topic is picked, with no visitor training needed.
 
 ## How it works
 
-- `app.py` — Flask server. Holds the list of topics (`TOPICS`), serves the web UI, and on each button press: tells the robot to play the topic's audio/gesture (`ROBOT_BASE_URL`) and tells LibreOffice Impress to jump to the topic's slide.
-- `impress_controller.py` — drives a running LibreOffice Impress instance via the UNO API to jump slides.
-- `templates/index.html`, `static/` — the iPad-facing web UI (HTML/CSS/JS).
-- `booth_content/` — pre-rendered voice audio (mp3/wav) per topic, played on the robot or through an external speaker.
-- `decks/` — the PowerPoint decks that Impress displays.
-- `start.sh` — one-shot script that connects to the robot over USB→WiFi ADB, relaunches the robot app, mirrors its screen with scrcpy, launches Deskreen (for screen-sharing the slide deck), and starts `app.py`.
+- `app.py`: Flask server. Holds the list of topics (`TOPICS`), serves the web UI, and on each button press: tells the robot to play the topic's audio/gesture (`ROBOT_BASE_URL`) and tells LibreOffice Impress to jump to the topic's slide.
+- `impress_controller.py`: drives a running LibreOffice Impress instance via the UNO API to jump slides.
+- `templates/index.html`, `static/`: the iPad-facing web UI (HTML/CSS/JS).
+- `booth_content/`: pre-rendered voice audio (mp3/wav) per topic, played on the robot or through an external speaker.
+- `decks/`: the PowerPoint decks that Impress displays.
+- `start.sh`: one-shot script that connects to the robot over USB→WiFi ADB, relaunches the robot app, mirrors its screen with scrcpy, launches Deskreen (for screen-sharing the slide deck), and starts `app.py`.
 
 ## Requirements
 
@@ -24,8 +24,8 @@ The iPad is just a remote — the robot and the slides react almost instantly to
 - Python 3 + pip
 - `adb` (`android-tools-adb` / `platform-tools`)
 - `scrcpy` (optional, for mirroring the robot's screen)
-- LibreOffice (Impress) — used to display and drive the slide deck
-- A [Deskreen](https://deskreen.com/) AppImage in `~/Downloads/` — used to screen-share the Impress window to the venue's display
+- LibreOffice (Impress): used to display and drive the slide deck
+- A [Deskreen](https://deskreen.com/) AppImage in `~/Downloads/`: used to screen-share the Impress window to the venue's display
 - A PowerPoint deck at `~/Downloads/siam.ai powerpoint.pptx` (or set `DECK_PATH`)
 
 ## Install
@@ -38,7 +38,7 @@ pip install -r requirements.txt
 
 Make sure `adb`, `scrcpy`, and LibreOffice are installed and on your `PATH` (e.g. on Debian/Ubuntu: `sudo apt install android-tools-adb scrcpy libreoffice`).
 
-Open LibreOffice Impress with the deck you want to present (`~/Downloads/siam.ai powerpoint.pptx` by default) before starting the app — `impress_controller.py` connects to an already-running Impress instance.
+Open LibreOffice Impress with the deck you want to present (`~/Downloads/siam.ai powerpoint.pptx` by default) before starting the app: `impress_controller.py` connects to an already-running Impress instance.
 
 ## Usage
 
@@ -63,9 +63,9 @@ Two manual steps remain after that (shown at the end of the script):
 
 ### Environment variables
 
-- `AUDIO_MODE` — `both` (default), `robot` (robot speaker only), or `screen` (external speaker only)
-- `ROBOT_BASE_URL` — base URL of the robot's HTTP server (default `http://localhost:8080`)
-- `DECK_PATH` — path to the PowerPoint deck (default `~/Downloads/siam.ai powerpoint.pptx`)
+- `AUDIO_MODE`: `both` (default), `robot` (robot speaker only), or `screen` (external speaker only)
+- `ROBOT_BASE_URL`: base URL of the robot's HTTP server (default `http://localhost:8080`)
+- `DECK_PATH`: path to the PowerPoint deck (default `~/Downloads/siam.ai powerpoint.pptx`)
 
 Example:
 ```bash
