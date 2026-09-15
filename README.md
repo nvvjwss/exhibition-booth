@@ -1,24 +1,24 @@
 # Exhibition Booth
 
-Robot-driven slide control panel for Siam.AI's booth. Tap a topic on the iPad: the Alpha Mini robot speaks about it, and the projector jumps to the matching slide.
+แผงควบคุมสไลด์ที่ขับเคลื่อนด้วยหุ่นยนต์ สำหรับบูธของ Siam.AI กดเลือกหัวข้อบน iPad หุ่นยนต์ Alpha Mini จะพูดอธิบาย และโปรเจกเตอร์จะเปลี่ยนไปสไลด์ที่ตรงกัน
 
-## Structure
+## โครงสร้างโปรเจกต์
 
-- `app.py`: Flask server, topic list, triggers robot audio + slide jump
-- `impress_controller.py`: drives LibreOffice Impress via UNO
-- `templates/`, `static/`: iPad web UI
-- `booth_content/`: per-topic voice audio
-- `decks/`: PowerPoint decks
-- `start.sh`: connects robot, mirrors screen, starts everything
+- `app.py`: Flask server, รายการหัวข้อ, สั่งหุ่นพูด + เปลี่ยนสไลด์
+- `impress_controller.py`: ควบคุม LibreOffice Impress ผ่าน UNO
+- `templates/`, `static/`: หน้าเว็บ UI สำหรับ iPad
+- `booth_content/`: เสียงพากย์แต่ละหัวข้อ
+- `decks/`: ไฟล์ PowerPoint
+- `start.sh`: เชื่อมต่อหุ่นยนต์, mirror หน้าจอ, เริ่มระบบทั้งหมด
 
-## Requirements
+## สิ่งที่ต้องมี
 
-- Linux + Alpha Mini robot over USB
-- Python 3, `adb`, `scrcpy` (optional), LibreOffice
-- Deskreen AppImage in `~/Downloads/`
-- PowerPoint deck at `~/Downloads/siam.ai powerpoint.pptx` (or set `DECK_PATH`)
+- เครื่อง Linux + หุ่นยนต์ Alpha Mini ต่อผ่าน USB
+- Python 3, `adb`, `scrcpy` (ถ้าต้องการ), LibreOffice
+- Deskreen AppImage ไว้ที่ `~/Downloads/`
+- ไฟล์ PowerPoint ที่ `~/Downloads/siam.ai powerpoint.pptx` (หรือกำหนดเองผ่าน `DECK_PATH`)
 
-## Install
+## ติดตั้ง
 
 ```bash
 git clone https://github.com/nvvjwss/exhibition-booth.git
@@ -26,18 +26,18 @@ cd exhibition-booth
 pip install -r requirements.txt
 ```
 
-Open the deck in LibreOffice Impress before starting the app.
+เปิดไฟล์สไลด์ใน LibreOffice Impress ก่อนรันแอป
 
-## Usage
+## วิธีใช้
 
 ```bash
 ./start.sh
 ```
 
-Then: open the Deskreen link on the display device and share the Impress window; connect the Bluetooth speaker if used.
+จากนั้น: เปิดลิงก์ Deskreen บนจอที่จะแสดงผล แล้ว share หน้าต่าง Impress; ต่อลำโพง Bluetooth ถ้าใช้
 
-### Env vars
+### ตัวแปรสภาพแวดล้อม (Env vars)
 
-- `AUDIO_MODE`: `both` (default) / `robot` / `screen`
-- `ROBOT_BASE_URL`: default `http://localhost:8080`
-- `DECK_PATH`: default `~/Downloads/siam.ai powerpoint.pptx`
+- `AUDIO_MODE`: `both` (ค่าเริ่มต้น) / `robot` / `screen`
+- `ROBOT_BASE_URL`: ค่าเริ่มต้น `http://localhost:8080`
+- `DECK_PATH`: ค่าเริ่มต้น `~/Downloads/siam.ai powerpoint.pptx`
