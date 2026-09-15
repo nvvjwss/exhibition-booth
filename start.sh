@@ -92,7 +92,7 @@ fi
 # 6. Clear stale LibreOffice locks (from any previous kill -9)
 # ---------------------------------------------------------------
 log "Clearing stale LibreOffice locks..."
-rm -f ~/.config/libreoffice/4/.lock ~/Downloads/.~lock*.pptx# 2>/dev/null
+rm -f ~/.config/libreoffice/4/.lock decks/.~lock*.pptx# 2>/dev/null
 
 # ---------------------------------------------------------------
 # 7. Kill any leftover app.py / soffice from a previous run

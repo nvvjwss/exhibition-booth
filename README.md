@@ -16,7 +16,7 @@
 - เครื่อง Linux + หุ่นยนต์ Alpha Mini ต่อผ่าน USB
 - Python 3, `adb`, `scrcpy` (ถ้าต้องการ), LibreOffice
 - Deskreen AppImage ไว้ที่ `~/Downloads/`
-- ไฟล์ PowerPoint ที่ `~/Downloads/siam.ai powerpoint.pptx` (หรือกำหนดเองผ่าน `DECK_PATH`)
+- ไฟล์ PowerPoint (ไม่ได้เก็บใน repo เพราะไฟล์ใหญ่เกิน GitHub limit) — ดูวิธีวางไฟล์ด้านล่าง
 
 ## ติดตั้ง
 
@@ -26,7 +26,7 @@ cd exhibition-booth
 pip install -r requirements.txt
 ```
 
-เปิดไฟล์สไลด์ใน LibreOffice Impress ก่อนรันแอป
+ดาวน์โหลดไฟล์ `siam.ai powerpoint.pptx` มาเอง แล้ววางไว้ที่ `decks/siam.ai powerpoint.pptx` ในโฟลเดอร์ repo (หรือกำหนด path เองผ่าน `DECK_PATH`) จากนั้นเปิดไฟล์นั้นใน LibreOffice Impress ก่อนรันแอป
 
 ## วิธีใช้
 
@@ -40,4 +40,4 @@ pip install -r requirements.txt
 
 - `AUDIO_MODE`: `both` (ค่าเริ่มต้น) / `robot` / `screen`
 - `ROBOT_BASE_URL`: ค่าเริ่มต้น `http://localhost:8080`
-- `DECK_PATH`: ค่าเริ่มต้น `~/Downloads/siam.ai powerpoint.pptx`
+- `DECK_PATH`: ค่าเริ่มต้น `decks/siam.ai powerpoint.pptx` (relative กับตำแหน่ง repo เอง ใช้ได้ทุกเครื่อง)

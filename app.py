@@ -24,7 +24,7 @@ ROBOT_STOP_URL = ROBOT_BASE_URL + "/stop"
 # "robot"  = ส่งเสียงไปเล่นที่ลำโพงหุ่นเท่านั้น (หุ่นขยับท่าทางประกอบได้ปกติ)
 # "both"   = เล่นทั้งสองที่พร้อมกัน (ลำโพงนอกดังขึ้น + หุ่นยังขยับท่าทางประกอบได้ปกติ)
 AUDIO_MODE = os.environ.get("AUDIO_MODE", "both")
-DECK_PATH = os.environ.get("DECK_PATH", str(Path.home() / "Downloads" / "siam.ai powerpoint.pptx"))
+DECK_PATH = os.environ.get("DECK_PATH", str(Path(__file__).parent / "decks" / "siam.ai powerpoint.pptx"))
 IDLE_SLIDE = 1
 
 _desktop = None  # เก็บไว้ใช้ซ้ำ ไม่เชื่อมต่อ UNO ใหม่ทุกครั้งที่กดปุ่ม
